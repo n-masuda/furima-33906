@@ -36,11 +36,6 @@
 
 - has_one :purchase_record
 - belongs_to :user
-- belongs_to :category
-- belongs_to :status
-- belongs_to :delivery_fee
-- belongs_to :prefecture
-- belongs_to :shipment
 
 ## Purchase_recordsテーブル
 
@@ -70,4 +65,3 @@
 ### Association
 
 - belongs_to :purchase_record
-- belongs_to :prefecture
