@@ -28,7 +28,7 @@
 | status_id         | integer   | null: false                    |<!--商品状態-->
 | delivery_fee_id   | integer   | null: false                    |<!--配送料-->
 | prefecture_id     | integer   | null: false                    |
-| price             | string    | null: false                    |
+| price             | integer   | null: false                    |
 | shipment_id       | integer   | null: false                    |<!--配送日数-->
 | user              | reference | null: false, foreign_key: true |
 
