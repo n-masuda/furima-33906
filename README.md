@@ -1,24 +1,74 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column              | Type    | Options     |
+| ------------------- | ------- | ----------- |
+| nickname            | string  | null: false |
+| password            | string  | null: false |
+| email               | string  | null: false |
+| last_name           | string  | null: false |
+| first_name          | string  | null: false |
+| last_name_kana      | string  | null: false |
+| first_name_kana     | string  | null: false |
+| birth_id            | integer | null: false, foreign_key: true |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :purchase_record
+- belongs_to :birth
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Column            | Type      | Options                        |
+| ----------------- | --------- | ------------------------------ |
+| name              | string    | null: false                    |
+| text              | text      | null: false                    |
+| category_id       | integer   | null: false, foreign_key: true |
+| status_id         | integer   | null: false, foreign_key: true |<!--商品状態-->
+| delivery_fee_id   | integer   | null: false, foreign_key: true |<!--配送料-->
+| prefecture_id     | integer   | null: false, foreign_key: true |
+| price             | string    | null: false                    |
+| shipment_id       | integer   | null: false, foreign_key: true |<!--配送日数-->
+| user              | reference | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_one :purchase_record
+- belongs_to :user
+- belongs_to :category
+- belongs_to :status
+- belongs_to :delivery_fee
+- belongs_to :prefecture
+- belongs_to :shipment
 
-* Services (job queues, cache servers, search engines, etc.)
+## Purchase_recordsテーブル
 
-* Deployment instructions
+| Column      | Type      | Options                        |
+| ----------- | --------- | ------------------------------ |
+| user        | reference | null: false, foreign_key: true |
+| item        | reference | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- has_one :purchase
+- belongs_to :item
+- belongs_to :user
+
+## Purchasesテーブル
+
+| Column             | Type      | Options                        |
+| ------------------ | --------- | ------------------------------ |
+| postal_code        | string    | null: false                    |<!--郵便番号-->
+| city               | string    | null: false                    |
+| add_line1          | string    | null: false                    |<!--番地-->
+| add_line2          | string    |                                |<!--建物名-->
+| phone              | string    | null: false                    |
+| prefecture_id      | integer   | null: false, foreign_key: true |
+| purchase_record    | reference | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :purchase_record
+- belongs_to :prefecture
