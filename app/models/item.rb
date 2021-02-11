@@ -3,7 +3,7 @@ class Item < ApplicationRecord
 
   belongs_to :category
   belongs_to :status
-  belongs_to :deliveryfee
+  belongs_to :deliveryFee
   belongs_to :prefecture
   belongs_to :shipment
   belongs_to :user
@@ -14,15 +14,15 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :text, presence: true
 
-  with_options presence: true, numericality: { other_than: 0, message: 'Select'} do
+  with_options presence: true, numericality: { other_than: 0, message: "can't be blank"} do
     validates :shipment_id
     validates :category_id
     validates :status_id
     validates :delivery_fee_id
     validates :prefecture_id
   end
-  
-  validates :price, presence: true, numericality: { only_integer:true,gather_than:300,less_than:9999999} 
+
+  validates :price, presence: true, numericality: { only_integer:true, greater_than:300,less_than:9999999} 
 
 
 
