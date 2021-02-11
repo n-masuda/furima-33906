@@ -22,7 +22,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
   end
 
-  validates :price, presence: true, numericality: { only_integer:true, greater_than:300,less_than:9999999} 
+  validates :price, presence: true, numericality: { only_integer:true, greater_than:299,less_than:10000000} 
 
 
 
