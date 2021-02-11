@@ -10,13 +10,21 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  validates :image, presence: true
   validates :name, presence: true
   validates :text, presence: true
-  validates :category_id, presence: true, numericality: { other_than: 0 }
-  validates :status_id, presence: true, numericality: { other_than: 0 }
-  validates :delivery_fee_id, presence: true, numericality: { other_than: 0 }
-  validates :prefecture_id, presence: true, numericality: { other_than: 0 }
-  validates :price, presence: true, numericality: { only_integer:true,gather_than:300,less_than:9999999} 
-  validates :shipment_id, presence: true, numericality: { other_than: 0 }
+
+  with_options presence: true, numericality: { other_than: 0, message: 'Select'} do
+    validates :shipment_id
+    validates :category_id
+    validates :status_id
+    validates :delivery_fee_id
+    validates :prefecture_id
+  end
+
+  validates :price, presence: true, only_integer: true, numericality: { gather_than:300,less_than:9999999} 
+
+
+
 end
 
