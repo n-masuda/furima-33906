@@ -21,8 +21,8 @@ class Item < ApplicationRecord
     validates :delivery_fee_id
     validates :prefecture_id
   end
-
-  validates :price, presence: true, only_integer: true, numericality: { gather_than:300,less_than:9999999} 
+  
+  validates :price, presence: true, numericality: { only_integer:true,gather_than:300,less_than:9999999} 
 
 
 
