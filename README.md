@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchase_records
+- has_many :orders
 
 ## itemsテーブル
 
@@ -34,10 +34,10 @@
 
 ### Association
 
-- has_one :purchase_record
+- has_one :order
 - belongs_to :user
 
-## Purchase_recordsテーブル
+## Ordersテーブル
 
 | Column      | Type      | Options                        |
 | ----------- | --------- | ------------------------------ |
@@ -60,8 +60,8 @@
 | add_line2          | string    |                                |<!--建物名-->
 | phone              | string    | null: false                    |
 | prefecture_id      | integer   | null: false                    |
-| purchase_record    | reference | null: false, foreign_key: true |
+| order              | reference | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase_record
+- belongs_to :order
