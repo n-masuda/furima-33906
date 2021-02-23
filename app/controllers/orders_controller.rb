@@ -1,10 +1,13 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  #before_action :own_user
   def index
     @form = Form.new
   end
 
   def create
+
     @form = Form.new(form_params)
     if @form.valid?
       @form.save
@@ -22,5 +25,11 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+  
+  def own_user!
+    if current_user.id == @item.user.id
+      redirect_to root_path
+    end
   end
 end
