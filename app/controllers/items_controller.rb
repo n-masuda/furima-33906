@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
   before_action :own_user, only: [:edit, :update, :destroy]
+  before_action :item_sold, only: [:index, :show, :edit]
   def index
     @items = Item.all.order("created_at DESC")
   end
@@ -23,6 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item_sold.include?(@item.id)
+      redirect_to root_path
+    end
   end
 
   def update
@@ -56,4 +60,7 @@ class ItemsController < ApplicationController
     end
   end
 
+  def item_sold
+    @item_sold = Order.pluck(:item_id)
+  end
 end
