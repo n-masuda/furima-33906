@@ -45,8 +45,7 @@ class OrdersController < ApplicationController
   end
 
   def item_sold
-    @item_sold = Order.pluck(:item_id)
-    redirect_to root_path if @item_sold.include?(@item.id)
+    redirect_to root_path if @item.order != nil
   end
 
   
