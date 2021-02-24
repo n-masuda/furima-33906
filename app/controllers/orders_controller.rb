@@ -17,29 +17,28 @@ class OrdersController < ApplicationController
     end
   end
 
-
   private
+
   def form_params
-    params.require(:form).permit(:postal_code, :city, :add_line1, :add_line2, :phone, :prefecture_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:form).permit(:postal_code, :city, :add_line1, :add_line2, :phone, :prefecture_id).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def set_item
     @item = Item.find(params[:item_id])
   end
-  
+
   def own_user!
-    if current_user.id == @item.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id == @item.user.id
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: form_params[:token],
       currency: 'jpy'
     )
   end
-
 end

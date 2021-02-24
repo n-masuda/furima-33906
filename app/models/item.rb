@@ -15,7 +15,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :text, presence: true
 
-  with_options presence: true, numericality: { other_than: 0, message: "can't be blank"} do
+  with_options presence: true, numericality: { other_than: 0, message: "can't be blank" } do
     validates :shipment_id
     validates :category_id
     validates :status_id
@@ -23,9 +23,5 @@ class Item < ApplicationRecord
     validates :prefecture_id
   end
 
-  validates :price, presence: true, numericality: { only_integer:true, greater_than:299,less_than:10000000} 
-
-
-
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
 end
-
