@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
   before_action :own_user!
+  before_action :item_sold, only: [:index, :create]
+
   def index
     @form = Form.new
   end
@@ -41,4 +43,11 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
+
+  def item_sold
+    @item_sold = Order.pluck(:item_id)
+    redirect_to root_path if @item_sold.include?(@item.id)
+  end
+
+  
 end
