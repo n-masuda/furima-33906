@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :item do
+    id { 1 }
     name { '２０１２年発売CD　Rhymestar ★マニフェスト★' }
     text { '世界一ダサいジャケット' }
     shipment_id { 1 }
